@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useState } from 'react';
 
-import SearchIcon from "./searchIcon";
+function SearchBox({ searchTerm, onSearch, onSearchButtonClick }) {
+  const [inputValue, setInputValue] = useState(searchTerm);
 
-import "./index.css";
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
-const SearchBox = () => {
+  const handleSearchClick = () => {
+    onSearch(inputValue);
+  };
 
-  return(
-  <div className="search-box">
-    <SearchIcon />
-    <input type="text" placeholder="Busca en este sitio web" />
-  </div>
-)};
+  return (
+    <div className="search-box">
+      <input
+        type="text"
+        placeholder="Buscar plato..."
+        value={inputValue}
+        onChange={handleInputChange}
+      />
+      <button onClick={handleSearchClick}>Buscar</button>
+    </div>
+  );
+}
 
 export default SearchBox;
+
